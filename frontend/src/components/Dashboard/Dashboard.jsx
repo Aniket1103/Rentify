@@ -30,9 +30,10 @@ const Dashboard = ({ userState }) => {
 
   const getProperties = async (role) => {
     const endpoint = role === 'Seller'
-      ? 'http://localhost:4000/api/v1/property/seller'
-      : 'http://localhost:4000/api/v1/property/buyer';
+      ? `${import.meta.env.VITE_BASE_URL}/api/v1/property/seller`
+      : `${import.meta.env.VITE_BASE_URL}/api/v1/property/buyer`;
 
+    console.log(`${import.meta.env.VITE_BASE_URL}/api/v1/property/seller`)
     try {
       const { data } = await axios.get(endpoint, {
         withCredentials: true
@@ -45,6 +46,7 @@ const Dashboard = ({ userState }) => {
   };
 
   useEffect(() => {
+    // console.log(import.meta.env.VITE_BASE_URL)
     getProperties(currentUser.role);
   }, [currentUser.role]);
 
@@ -60,7 +62,7 @@ const Dashboard = ({ userState }) => {
     console.log(`Delete property with id: ${propertyId}`);
     
     try {
-      await axios.delete(`http://localhost:4000/api/v1/property/delete?id=${propertyId}`, {
+      await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/v1/property/delete?id=${propertyId}`, {
         withCredentials: true
       });
       setPropertyData(propertyData.filter(property => property._id !== propertyId));
@@ -79,7 +81,7 @@ const Dashboard = ({ userState }) => {
         }
       }
       
-      const { data } = (formData.action === 'create') ? await axios.post(`http://localhost:4000/api/v1/property/create`, newProperty, config) : await axios.patch(`http://localhost:4000/api/v1/property/update`, newProperty, config);
+      const { data } = (formData.action === 'create') ? await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/property/create`, newProperty, config) : await axios.patch(`${import.meta.env.VITE_BASE_URL}/api/v1/property/update`, newProperty, config);
 
       data.property = newProperty;
 

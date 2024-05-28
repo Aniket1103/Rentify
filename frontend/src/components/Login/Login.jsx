@@ -39,7 +39,7 @@ const Login = () => {
         },
         withCredentials: true
       }
-      const response = await axios.post(`http://localhost:4000/api/v1/login`, {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/login`, {
           email,
           password
       }, config);
