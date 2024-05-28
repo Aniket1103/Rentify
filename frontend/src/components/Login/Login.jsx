@@ -4,6 +4,17 @@ import axios from "axios";
 import "./Login.css"; 
 import { toast, Toaster } from "react-hot-toast";
 
+const CREDS = {
+  "Buyer" : {
+    email: "buyer.test@gmail.com",
+    password: "buyertest123"
+  },
+  "Seller": {
+    email: "seller.test@gmail.com",
+    password: "sellertest123"
+  }
+}
+
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -28,7 +39,7 @@ const Login = () => {
         },
         withCredentials: true
       }
-      const response = await axios.post(`http://localhost:4000/api/v1/login`, {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/login`, {
           email,
           password
       }, config);
@@ -50,15 +61,12 @@ const Login = () => {
     console.log(formData);
   };
 
-  const handleContinueAsGuest = async () => {
-    // Handle "Continue as Guest" button action here
-    setFormData({
-      email: "manager1@gmail.com",
-      password: "manager1pass"
-    })
-    await handleLogin();
-    console.log("Continue as Manager clicked!");
-  };
+    const handleContinueAsGuest = async (role) => {
+      // Handle "Continue as Guest" button action here
+      setFormData(CREDS[role])
+      await handleLogin();  
+      console.log(`Continue as ${role} clicked!`);
+    };
 
 
   return (
@@ -91,7 +99,10 @@ const Login = () => {
           </div>
           <button type="submit">Login</button>
           <div className="continue-as-guest">
-            <button onClick={handleContinueAsGuest}>Continue as Manager</button>
+            <button onClick={() => handleContinueAsGuest("Buyer")}>Continue as Buyer <code>test</code></button>
+          </div>
+          <div className="continue-as-guest">
+            <button onClick={() => handleContinueAsGuest("Seller")}>Continue as Seller <code>test</code></button>
           </div>
           <div className="register-link">
             <p>
