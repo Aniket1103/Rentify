@@ -49,7 +49,7 @@
     top: 100%;
     right: 0;
     background-color: #ffffff;
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
     border-radius: 0.25rem;
     padding: 0.625rem;
     display: flex;
@@ -57,7 +57,6 @@
   }
   
   .dropdown p {
-    /* background-color: rgb(132, 132, 132); */
     color: #000;
     font-weight: bold;
     align-self: center;
@@ -68,11 +67,11 @@
     cursor: pointer;
     color: #fff;
     border: solid 1px #fff;
-    padding: 0rem 1rem;
+    padding: 0.5rem 1.8rem;
+    margin: 5px;
   }
   
   .dropdown button:hover {
     border: solid 1px var(--secondary-color);
     background-color: var(--secondary-color);
-    /* color: var(--primary-color); */
   }
