@@ -12,11 +12,11 @@ config({
 export const app = express();
 
 const corsOptions = {
-    origin: 'http://localhost:5173',
-    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+    origin: process.env.FRONTEND_URL,
+    credentials: true, // to allow credentials (cookies, authorization headers, etc.)
 };
 
-// Use the CORS middleware with the options
+// For browser cors policies
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
